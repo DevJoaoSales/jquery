@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02 Primeiros Passos</title>
+</head>
+<body>
+    <h1 id="title">Esse é meu segundo código jQuery</h1>
+    <img src="02-hcode.png">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+    <script>
+        
+        // Funções javaScript.
+        const initPage = () => {
+            alert('Inicializou');
+
+            console.log("Pagina Ok");
+        }
+
+        const stylizeTitle = () => {
+            document.getElementById('title').style.color = 'red';
+        }
+
+        /*
+        window.onload = () => {
+            initPage();
+            stylizeTitle();
+        } 
+        */
+
+        $(document).ready( ()=>{
+            initPage();
+            stylizeTitle();
+        } );
+
+    </script>
+</body>
+</html>
