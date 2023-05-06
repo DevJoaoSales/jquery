@@ -75,34 +75,39 @@
 
                 <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quos id nam reprehenderit repudiandae officiis laboriosam, ipsum molestias corporis magni enim modi tempora iure blanditiis quo labore placeat at laudantium doloremque?Consequatur itaque odio ipsum soluta quas fugit quisquam, unde eum porro dolorem doloribus, nostrum expedita et adipisci vel distinctio fugiat voluptatem? Voluptatem quia aspernatur quaerat, laboriosam ratione ipsa doloremque adipisci.</p>
 
-                <!--<div class="cars">
+                <div class="cars">
 
                     <h3>Carros</h3>
                     <ul class="cars_list">
-                        <li data-ano="1983">Uno <span> - Fiat</span></li>
+                        <li data-ano="1983">Uno<span> - FIAT</span></li>
                         <li data-ano="1996">Palio</li>
-                        <li data-ano="2013">Ônix <span> - GM</span></li>
-                        <li></li>
-                        <li></li>
+                        <li data-ano="2013">Ônix<span> - GM</span></li>
+                        <li>Celta</li>
+                        <li>Fiesta</li>
                     </ul>
-    
-                </div>-->
+                </div>
 
                 <div class="cars">
 
                     <h3>Carros</h3>
                     <ul class="cars_list">
-                        <li>Uno</li>
-                        <li>Palio</li>
-                        <li>Ônix</li>
-                        <li>Fox</li>
-                        <li>Fiesta</li>
+                        <li data-ano="1931">Porsche</li>
+                        <li data-ano="1939">Ferrari<span> - ITALIA</span></li>
+                        <li data-ano="1948">Land Rover</li>
+                        <li data-ano="1963">Lamborghini</li>
+                        <li data-ano="2003">Fusca</li>
                     </ul>
     
                 </div>
+
+                
                 <!--
-                <button type="button" id="toggle_cars">Exibir/Ocultar os carros</button>
+                <button type="button" id="show_cars">Exibir carros</button>
+                <button type="button" id="hide_cars">Ocultar os carros</button>
                 -->
+                
+                <button type="button" id="toggle_cars">Exibir/Ocultar os carros</button>
+                
             </main>
 
         </section>
@@ -129,44 +134,40 @@
 
         <script type="text/javascript">
 
-            $(document).ready(function(){
+        $(document).ready(()=>{
 
-                $('#toggle_cars').click(function(){
+            $("#toggle_cars").click(()=>{
 
-                    let hiddenCars = $('.cars_list li:hidden').length;
-                    let method = (hiddenCars > 0) ? 'show' : 'hide';
+                let hiddenCars = $(".cars_list li:hidden").length;
+                let method = (hiddenCars > 0 ? 'show' : 'hide')
 
-                    eval(`$('.cars_list li').${method}()`);                    
-
-                });
-
-                $.expr[':'].carsCentury21 = function(el) {
-
-                    return ($(el).data('ano') > 2000);
-
-                }
-
-                $.expr[':'].carsBeforeYear = $.expr.createPseudo(function(year){
-
-                    return function(el) {
-
-                        return ($(el).data('ano') < year);
-
-                    }
-
-                });
-
-                // Criando nosso próprio filtro
-                // $('.cars_list li:carsCentury21').css('font-size', '30px')
-
+                // eval transforma string em code js.
+                eval(` $(".cars_list li").${method}() `); 
             });
 
-        </script>
+        });
+        
+        // ##### Situação 01 #####
 
-        <script type="text/javascript">
-            
+        /* // Criando nosso propio filtro
+        $.expr[':'].carsCentury21 = (el) => {
+            return ( $(el).data('ano') > 2000 );
+        }
 
-            
+        // Usando nosso propio filtro
+        $(".cars_list li:carsCentury21").css("font-size","30px");
+        */
+
+        // ##### Situação 02 #####
+
+        $.expr[':'].carsBeforeYear = $.expr.createPseudo((year)=>{
+            return (el)=>{
+                return ($(el).data('ano') < year)
+            }
+        })
+
+        $(".cars_list li:carsBeforeYear(1990)").css('color','orange');
+        $(".cars_list li:carsBeforeYear(1950)").css('color','red')
 
         </script>
 
