@@ -15,7 +15,7 @@
             <div class="row">
                 <div class="col-md-4 col-sm-4 col-xs-4">
                     <div class="logo">
-                        <a href="https://www.hcode.com.br"><img src="img/logo-hcode.svg" alt="Logo da Hcode"></a>
+                        <a id="link_logo" href="https://www.hcode.com.br"><img src="img/logo-hcode.svg" alt="Logo da Hcode"></a>
                     </div>
                 </div>
                 <div class="col-md-8 col-sm-8 col-xs-8 title">
@@ -166,6 +166,9 @@
                 </div>
             </div>
 
+            <p>Lorem <span style="color:red;">ipsum dolor sit amet consectetur adipisicing elit.</span> Itaque quidem ducimus incidunt, consequatur nemo temporibus, recusandae voluptatibus beatae minima consectetur distinctio, architecto facilis nisi doloremque fugit aliquam tempora! Repellat, nemo.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque quidem ducimus incidunt, consequatur nemo temporibus, recusandae voluptatibus beatae minima consectetur distinctio, architecto facilis nisi doloremque fugit aliquam tempora! Repellat, nemo.</p>
+
         </div>
 
     </section>
@@ -180,50 +183,7 @@
 
     <script>
     
-        $(document).ready(()=>{
-
-            /*// Evento para quando o elemento receber o foco.
-            $("[name]").focus(function(){
-                
-                $(this).css("background","yellow");
-            }); */
-
-            /*// Evento para quando o elemento perder o focu
-            $("[name]").blur(function(){
-                alert(`Você Digitou: ${ $(this).val() }`);
-            }); */
-
-            /* // Evento para quando o elemento receber o foco, mesmo que seja um elemento filho.
-            $(".form-group").focusin(function(){
-
-                console.log(`Você selecionou um campo.`);
-            }); */
-
-            /*// Evento para quando o elemento perder o focu.
-            $(".form-group").focusout(function(){
-
-                alert(`Você deixou um elemento`);
-            }); */ 
-
-            /*// Evento para quando o campo mudar o seu valor.
-            $("[name]").change(function(){
-
-                console.log(`Valor do campo: ${$(this).val()}`);
-            }); */
-
-            /*// Evento para quando selecionarmos o valor de um campo do formulario.
-            $("[name]").select(function(){
-
-                console.log(`Você selecionou o valor deste campo`);
-            }); */
-
-            //
-            $("form").submit(function(){
-                event.preventDefault(); // bloquear funcao padrao do botao.
-                console.log($(this).serializeArray());
-            });
-
-        });
+        
 
     </script>
 
