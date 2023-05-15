@@ -15,7 +15,7 @@
             <div class="row">
                 <div class="col-md-4 col-sm-4 col-xs-4">
                     <div class="logo">
-                        <img src="img/logo-hcode.svg" alt="Logo da Hcode">
+                        <a href="https://www.hcode.com.br"><img src="img/logo-hcode.svg" alt="Logo da Hcode"></a>
                     </div>
                 </div>
                 <div class="col-md-8 col-sm-8 col-xs-8 title">
@@ -180,80 +180,51 @@
 
     <script>
     
-        $(document).ready(function(){
-            
-            /*// Evento para quando pressionar o mouse
-            $("h1").mousedown(function(){
-                console.log("apertei o mouse!!!");
-            }); */
+        $(document).ready(()=>{
 
-            /*// Evento para quando soltar o mouse
-            $("h1").mouseup(function(){
-                console.log("soltei o botão do mouse")
-            }); */
-
-            /*// Evento para quando pressionamos e soltamos o click do mouse
-            $("h1").click(function(){
-                console.log("Apertei e soltei");
-            });
-
-            $("h3.books").click(function(){
+            /*// Evento para quando o elemento receber o foco.
+            $("[name]").focus(function(){
                 
-                $(this).text("Fui clicado");
-
+                $(this).css("background","yellow");
             }); */
 
-            // Simulando o clique de um elemento.
-            //$("h3.books").click();
-
-            /*// Evento para o botão direito do mouse.
-            $("img").contextmenu(function(){
-                alert("clicamos com o botão direito");
-            });*/
-
-            // Simulando o clique do botao direito do mouse
-            //$("img").contextmenu();
-
-            /*// Evento para duplo click.
-            $("table tbody tr").dblclick(function(){
-                $(this).css({
-                    background:"#000",
-                    color:"#fff",
-                });
+            /*// Evento para quando o elemento perder o focu
+            $("[name]").blur(function(){
+                alert(`Você Digitou: ${ $(this).val() }`);
             }); */
 
-            // Simulando o duplo click.
-            //$("table tbody tr:eq(1)").dblclick();
+            /* // Evento para quando o elemento receber o foco, mesmo que seja um elemento filho.
+            $(".form-group").focusin(function(){
 
-            /*// Evento para quando o cursor do mouse "passa por cima" ou "entra" no elemento.
-            $("table tbody tr").mouseenter(function(){
-                $(this).addClass("trselected");
+                console.log(`Você selecionou um campo.`);
             }); */
 
-            /*// Evento para quando o cursor "deixa" um elemento.
-            $("table tbody tr").mouseleave(function(){
-                $(this).removeClass("trselected");
+            /*// Evento para quando o elemento perder o focu.
+            $(".form-group").focusout(function(){
+
+                alert(`Você deixou um elemento`);
+            }); */ 
+
+            /*// Evento para quando o campo mudar o seu valor.
+            $("[name]").change(function(){
+
+                console.log(`Valor do campo: ${$(this).val()}`);
             }); */
 
-            // Evento para quando o cursor "entra" e "deixa" um elemento
-            $("table tbody tr").hover(
-                function(){
-                    $(this).addClass("trselected");
-                },
-                function(){
-                    $(this).removeClass("trselected");
-                }
-            );
+            /*// Evento para quando selecionarmos o valor de um campo do formulario.
+            $("[name]").select(function(){
 
-            /*// Evento para quando move o curso do mouse se movimenta dentro de um elemento.
-            $("table tbody tr").mousemove(function(){
-                $("h1").text(`X: ${event.pageX}/ Y: ${event.pageY}`);
-            });*/ 
+                console.log(`Você selecionou o valor deste campo`);
+            }); */
 
             //
+            $("form").submit(function(){
+                event.preventDefault(); // bloquear funcao padrao do botao.
+                console.log($(this).serializeArray());
+            });
 
         });
-        
+
     </script>
 
 </body>
