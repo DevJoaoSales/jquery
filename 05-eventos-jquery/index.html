@@ -35,6 +35,8 @@
 
                     <h3 class="text-center books"><u>Lista de Livros</u></h3>
 
+                    <button class="btn btn-info" id="btn_add_book">Adicionar Livro</button>
+
                     <table class="table table-striped" id="books_list">
                         <thead>
                             <tr>
@@ -45,7 +47,7 @@
                         <tbody>
                             <tr>
                                 <td>Dom Quixote</td>
-                                <td>Miguel de Cervantes</td>
+                                <td>Miguel de <a target="_blank" href="https:ww.google.com.br">Cervantes</a></td>
                             </tr>
                             <tr>
                                 <td>Guerra e Paz</td>
@@ -55,8 +57,20 @@
                                 <td>Dom Casmurro</td>
                                 <td>Machado de Assis</td>
                             </tr>
+                            <tr>
+                                <td>Learning jQuery</td>
+                                <td>Jonathan Chaffer</td>
+                            </tr>
+                            <tr>
+                                <td>Extraordinário</td>
+                                <td>R.J Palacio</td>
+                            </tr>
+                            <tr class="trselected">
+                                <td>Star Wars - Herdeiro do Império</td>
+                                <td>Timothy Zhan</td>
+                            </tr>
                         </tbody>
-                    </table>
+                    </table> 
 
                 </div>
 
@@ -166,6 +180,8 @@
                 </div>
             </div>
 
+            <button class="btn btn-warning" id="btn_remove_css_color">Retirar Evento</button>
+
             <p>Lorem <span style="color:red;">ipsum dolor sit amet consectetur adipisicing elit.</span> Itaque quidem ducimus incidunt, consequatur nemo temporibus, recusandae voluptatibus beatae minima consectetur distinctio, architecto facilis nisi doloremque fugit aliquam tempora! Repellat, nemo.</p>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque quidem ducimus incidunt, consequatur nemo temporibus, recusandae voluptatibus beatae minima consectetur distinctio, architecto facilis nisi doloremque fugit aliquam tempora! Repellat, nemo.</p>
 
@@ -183,7 +199,31 @@
 
     <script>
     
-        
+        $(document).ready(()=>{
+
+            $(window).scroll(function(){
+
+                let position = $(window).scrollTop();
+                let sections = ['.title','.books','.register'];
+                let index;
+
+                if( position < 50 ){
+                    index = 0;
+                }else if( position < 200 ){
+                    index = 1;
+                }else if(200 < position < 400){
+                    index = 2;
+                }
+
+                $(sections[index]).addClass("selected_section");
+                sections.splice(index,1);
+
+                $(sections.join(", ")).removeClass("selected_section");
+
+            });
+
+            
+        });
 
     </script>
 

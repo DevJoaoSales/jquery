@@ -16,21 +16,24 @@ header h1 {
     font-family: 'Times New Roman', Times, sans-serif;
 }
 
-.trselected {
-    background: black !important;
-    color: white;
+section h2 {
+    font-family: 'Quicksand', sans-serif;
 }
 
-.formulario, #form_login {
-    margin-top: 30px;
+.courses_list {
+    margin: 25px 0;
 }
 
-.selected_section {
-    color: red;
+.courses_list img {
+    width: 100px;
 }
 
-.underline_section {
-    text-decoration:underline;
+.courses_list .course_item {
+    text-align: center;
+}
+
+.courses_list .course_item_inner {
+    height: 200px;
 }
 
 footer {
