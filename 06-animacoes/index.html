@@ -32,13 +32,21 @@
 
                 <div class="row">
 
-                    <div class="col-sm-8 col-md-8 col-xs-12">
+                    <div class="col-sm-4 col-md-4 col-xs-12">
                         <h2>Cursos Hcode</h2>
                     </div>
 
                     <div class="col-sm-4 col-md-4 col-xs-12">
-                        <button class="btn btn-danger" id="disable_effects">Desabilitar Animações</button>
+                        <button class="btn btn-success" id="init_effect">Iniciar Animações</button>
                     </div>
+
+                    <div class="col-sm-4 col-md-4 col-xs-12">
+                        <button class="btn btn-danger" id="stop_effect">Parar a animação</button>
+                    </div>
+
+                    <!--<div class="col-sm-4 col-md-4 col-xs-12">
+                        <button class="btn btn-danger" id="disable_effects">Desabilitar Animações</button>
+                    </div>-->
 
                 </div>
 
@@ -107,40 +115,44 @@
         
             $(document).ready(()=>{
 
-                // Criando animações personalizadas.
-                $("h1").animate({
-                    fontSize:"50px",
+                // Animações em sequencia.
+                $("#init_effect").on("click", function(){
 
-                },3000);
+                    $(".logo").animate({
+                        marginTop:"+=90px",
+                    },2000)
 
-                /*
-                $(".course_item h4").on("click",function(){
-                    $(this).animate({
-                        wordSpacing:"+=5px"
-                    },200);
-                });
-                */
+                    .delay(500) // tempo de delay para executar proxima animação.
 
-                $(".course_item").on("click",function(){
-                    $(this).animate({
-                        padding:"+=20px",
-                    });
-                });
+                    .animate({
+                        marginLeft:"+=200px",
+                    })
 
-                $("footer p").on("click",function(){
-                    
-                    $(this).animate({
-                        letterSpacing:"+=10px",
-                    },
-                    2000,
-                    function(){
-                        alert("Aumentou o espaçamento!!!");
-                    });
+                    .queue(function(){
+                        $("h1").text("Animação concluida!!!").css({
+                            "color":"red",
+                        });
 
-                });
+                        $(this).dequeue(); // continuar executando restante da fila.
+                    })
 
-                // Obs: usar camelCase no animate e no CSS.
-                
+                    //.delay(500) // tempo de delay para executar proxima animação.
+
+                    //.fadeOut(2000);
+
+                    // Limpar Fila de animações.
+                    // .clearQueue();
+
+                } );
+
+                $("#stop_effect").on("click",function(){
+
+                    // Parando uma animação.
+                    //$(".logo").stop(true,true);
+
+                    $(".logo").finish();
+
+                })
 
             });
             
