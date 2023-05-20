@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-bt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plugins</title>
+</head>
+<body>
+    
+    <h1>Hcode Treinamentos</h1>
+    <h2>Seção de Plugins</h2>
+    <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script>
+
+        (function(refjQuery){ // Evitando conflitos com outras bibliotecas.
+
+            // Criando Plugins.
+            refjQuery.fn.changeText = function(params){
+
+                let defaults = {
+                    fontSize:"30",
+                    color:"#ccc",
+                    fontFamily:"Verdana",
+                }
+
+                let options = $.extend(defaults, params);
+
+                return this.each(function(){ // retorna this para fazer fila de ações.
+                    $(this).css({
+                        "font-size":options.fontSize + "px",
+                        "color":options.color,
+                        "font-family":options.fontFamily
+                    });
+                });
+                 
+            }
+
+        })(jQuery);
+
+        
+
+        $(()=>{
+
+            $("h1").changeText({
+                fontSize:40,
+                fontFamily: "Arial",
+                color:"blue",
+            }); // Chamou o plugin.
+
+            //$("h1").changeText().css("color","red"); // ações em fila
+            
+        });
+    </script>
+</body>
+</html>
