@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto Select2</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="node_modules/select2/dist/css/select2.min.css">
+</head>
+<body>
+    <!-- .container>h1{HCODE treinamento}+form>.row.col-6*2 -->
+    <div class="container">
+        <h1>Hcode Treinamento</h1>
+        <form action="">
+            <div class="row col-6">
+                <!-- .form-group>label+input:text.form-control -->
+                <div class="form-group">
+                    <label for="">UserName</label>
+                    <input type="text" name="username" id="" class="form-control">
+                </div>
+            </div>
+            <div class="row col-6">
+                <div class="form-group">
+                    <label for="">Email</label>
+                    <input type="email" name="email" id="" class="form-control">
+                </div>
+            </div>
+            <!-- .row>.col-12>div.form-group>label+select.form-control -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group">
+                        <label for="select_states">Selecione seu Estado</label>
+                        <select name="" id="select_states" class="form-control" >
+                            <option value="AC">Acre</option>
+                            <option value="AL">Alagoas</option>
+                            <option value="AP">Amapá</option>
+                            <option value="AM">Amazonas</option>
+                            <option value="BA">Bahia</option>
+                            <option value="CE">Ceará</option>
+                            <option value="DF">Distrito Federal</option>
+                            <option value="ES">Espírito Santo</option>
+                            <option value="GO">Goiás</option>
+                            <option value="MA">Maranhão</option>
+                            <option value="MT">Mato Grosso</option>
+                            <option value="MS">Mato Grosso do Sul</option>
+                            <option value="MG">Minas Gerais</option>
+                            <option value="PA">Pará</option>
+                            <option value="PB">Paraíba</option>
+                            <option value="PR">Paraná</option>
+                            <option value="PE">Pernambuco</option>
+                            <option value="PI">Piauí</option>
+                            <option value="RJ">Rio de Janeiro</option>
+                            <option value="RN">Rio Grande do Norte</option>
+                            <option value="RS">Rio Grande do Sul</option>
+                            <option value="RO">Rondônia</option>
+                            <option value="RR">Roraima</option>
+                            <option value="SC">Santa Catarina</option>
+                            <option value="SP">São Paulo</option>
+                            <option value="SE">Sergipe</option>
+                            <option value="TO">Tocantins</option>
+                            <option value="EX">Estrangeiro</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="./node_modules/select2/dist/js/select2.min.js"></script>
+    <script>
+
+    $(document).ready(()=>{
+        $("#select_states").select2();
+        $("#select_states").change(function(){
+            console.log($(this).val()); // Virou Json
+        });
+    })
+
+    </script>
+</body>
+</html>
