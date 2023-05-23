@@ -4,80 +4,137 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projeto Select2</title>
+    <title>Projeto Select2 - Combobox AJAX</title>
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="node_modules/select2/dist/css/select2.min.css">
 </head>
 <body>
-    <!-- .container>h1{HCODE treinamento}+form>.row.col-6*2 -->
+    <!-- .container>h1{Hcode Treinamento}+form>.row>div.col-6*2 -->
+    
     <div class="container">
         <h1>Hcode Treinamento</h1>
         <form action="">
-            <div class="row col-6">
-                <!-- .form-group>label+input:text.form-control -->
-                <div class="form-group">
-                    <label for="">UserName</label>
-                    <input type="text" name="username" id="" class="form-control">
-                </div>
-            </div>
-            <div class="row col-6">
-                <div class="form-group">
-                    <label for="">Email</label>
-                    <input type="email" name="email" id="" class="form-control">
-                </div>
-            </div>
-            <!-- .row>.col-12>div.form-group>label+select.form-control -->
             <div class="row">
-                <div class="col-12">
+                <div class="col-6">
+                    <!-- .form-group>label+input:text.form-control -->
                     <div class="form-group">
-                        <label for="select_states">Selecione seu Estado</label>
-                        <select name="" id="select_states" class="form-control" >
-                            <option value="AC">Acre</option>
-                            <option value="AL">Alagoas</option>
-                            <option value="AP">Amapá</option>
-                            <option value="AM">Amazonas</option>
-                            <option value="BA">Bahia</option>
-                            <option value="CE">Ceará</option>
-                            <option value="DF">Distrito Federal</option>
-                            <option value="ES">Espírito Santo</option>
-                            <option value="GO">Goiás</option>
-                            <option value="MA">Maranhão</option>
-                            <option value="MT">Mato Grosso</option>
-                            <option value="MS">Mato Grosso do Sul</option>
-                            <option value="MG">Minas Gerais</option>
-                            <option value="PA">Pará</option>
-                            <option value="PB">Paraíba</option>
-                            <option value="PR">Paraná</option>
-                            <option value="PE">Pernambuco</option>
-                            <option value="PI">Piauí</option>
-                            <option value="RJ">Rio de Janeiro</option>
-                            <option value="RN">Rio Grande do Norte</option>
-                            <option value="RS">Rio Grande do Sul</option>
-                            <option value="RO">Rondônia</option>
-                            <option value="RR">Roraima</option>
-                            <option value="SC">Santa Catarina</option>
-                            <option value="SP">São Paulo</option>
-                            <option value="SE">Sergipe</option>
-                            <option value="TO">Tocantins</option>
-                            <option value="EX">Estrangeiro</option>
-                        </select>
+                        <label for="inputName">Nome</label>
+                        <input type="text" name="username" id="inputName" class="form-control">
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="inputEmail">Email</label>
+                        <input type="text" name="email" id="inputEmail" class="form-control">
                     </div>
                 </div>
             </div>
 
+            <!-- .row>.col-12>div.form-group>label+select.form-control -->
+            <div class="row">
+                
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="select_states">Selecione seu Estado</label>
+                        <select name="" id="select_states" class="form-control" >
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="select_cities">Selecione Estado</label>
+                        <select name="" id="select_cities" class="form-control"></select>
+                    </div>
+                </div>
+
+            </div>
         </form>
     </div>
 
+
+    <!-- .row>.col-12>div.form-group>label+select.form-control -->
+            
     <script src="./node_modules/jquery/dist/jquery.min.js"></script>
     <script src="./node_modules/select2/dist/js/select2.min.js"></script>
     <script>
 
     $(document).ready(()=>{
-        $("#select_states").select2();
-        $("#select_states").change(function(){
-            console.log($(this).val()); // Virou Json
+
+        function filterResults(dataToFilter, paramsToFilter) {
+            
+            return [...dataToFilter].filter((item)=>{
+                        
+                let regex = eval(`/${paramsToFilter.term}/gi`); 
+                let result = item.nome.match(regex);
+
+                return (result);
+            });
+        }
+
+        $("#select_states").select2({
+            ajax: {
+                url: "https://servicodados.ibge.gov.br/api/v1/localidades/estados",
+                processResults: (data,params) => {
+                    
+                    let newData = filterResults(data,params);
+
+                    return {
+                        results: newData
+                    }
+                },
+                data: params => {
+                    return {
+                        q: params.term
+                    }
+                }
+            },
+            templateResult: (data) => {
+
+                return data.nome;
+
+            },
+            templateSelection: (data) => {
+                return data.nome;
+            }
         });
-    })
+
+
+        $("#select_states").on("select2:select", event => {
+            let idState = event.params.data.id;
+
+            $("#select_cities").select2({
+                ajax: {
+                    url: `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${idState}/distritos`,
+                    processResults: (data,params) => {
+
+                        data = filterResults(data,params);
+
+                        return {
+                            results: data
+                        }
+                    },
+                    data: params => {
+
+                        return {
+                            q: params.term
+                        }
+
+                    }
+
+                },
+                templateResult: data => {
+
+                    return data.nome;
+                },
+                templateSelection: (data) => {
+                    return data.nome;
+                }   
+
+            });
+        })
+        
+    });
 
     </script>
 </body>
